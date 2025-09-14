@@ -58,13 +58,13 @@ else:
                         with open(cache_file, 'wb') as f:
                             pickle.dump(cache, f)
                         st.success(f"Renamed '{selected_case}' to '{new_name}'")
-                        st.experimental_rerun()
+                        st.rerun()
         with col2:
             if f'delete_mode_{selected_case}' not in st.session_state:
                 st.session_state[f'delete_mode_{selected_case}'] = False
             if st.button("Delete"):
                 st.session_state[f'delete_mode_{selected_case}'] = True
-                st.experimental_rerun()
+                st.rerun()
             if st.session_state[f'delete_mode_{selected_case}']:
                 confirm_col, cancel_col = st.columns([1,1], gap="small")
                 with confirm_col:
@@ -74,11 +74,11 @@ else:
                             pickle.dump(cache, f)
                         st.session_state['delete_success'] = f"Deleted '{selected_case}'"
                         st.session_state[f'delete_mode_{selected_case}'] = False
-                        st.experimental_rerun()
+                        st.rerun()
                 with cancel_col:
                     if st.button("Cancel", key=f"cancel_{selected_case}"):
                         st.session_state[f'delete_mode_{selected_case}'] = False
-                        st.experimental_rerun()
+                        st.rerun()
         # Display the cached table for the selected case
         if selected_case in cache and 'table_html' in cache[selected_case]:
             st.subheader("Cached Table Preview")
